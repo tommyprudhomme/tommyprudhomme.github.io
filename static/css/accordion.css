@@ -1,0 +1,37 @@
+.accordion {
+    margin-bottom: 0px !important;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+    overflow-x:visible!important;
+  }
+  
+  .active {
+    
+  }
+  
+  .accordion::before {
+    content: '\002B';
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 3px;
+    margin-right: 8px;
+  }
+  
+  .active:before {
+    content: "\2212";
+  }
+
+  .rectangle {
+    
+    --bulma-box-padding: 0rem !important;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out, padding 0.1s;
+  }
