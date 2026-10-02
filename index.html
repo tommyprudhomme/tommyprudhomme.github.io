@@ -121,7 +121,11 @@
           </div>
           <figure class="hero-figure reveal" data-delay="1">
             <div class="arch">
-              <img src="img_dogs/husky.webp" alt="Husky souriant pendant son bain, séché à la serviette" fetchpriority="high">
+              <img src="img_dogs/dog1-960w.webp"
+                   srcset="img_dogs/dog1-480w.webp 480w, img_dogs/dog1-960w.webp 960w, img_dogs/dog1-1536w.webp 1536w"
+                   sizes="(max-width: 900px) 92vw, 480px"
+                   width="1536" height="2048"
+                   alt="Jeune chien beige au pelage soyeux avec un bandana rose, sur la table de toilettage" fetchpriority="high">
             </div>
           </figure>
         </div>
@@ -142,7 +146,11 @@
           </div>
           <div class="stack reveal" data-delay="1">
             <div class="main">
-              <img src="img_dogs/jessy.webp" alt="Jeune bouvier brun au pelage long, assis sur la table de toilettage" loading="lazy">
+              <img src="img_dogs/dog13-480w.webp"
+                   srcset="img_dogs/dog13-480w.webp 480w, img_dogs/dog13-719w.webp 719w"
+                   sizes="(max-width: 900px) 92vw, 520px"
+                   width="719" height="480" loading="lazy"
+                   alt="Jeune bouvier brun au pelage long, assis sur la table de toilettage">
             </div>
           </div>
         </div>
@@ -153,7 +161,11 @@
         <div class="wrap section-grid">
           <div class="stack reveal">
             <div class="main">
-              <img src="img_dogs/Untitled5.jpg" alt="Deux chiens, un flat-coated retriever noir et un golden retriever, sur la table de toilettage" loading="lazy">
+              <img src="img_dogs/dog6-960w.webp"
+                   srcset="img_dogs/dog6-480w.webp 480w, img_dogs/dog6-960w.webp 960w, img_dogs/dog6-1600w.webp 1600w, img_dogs/dog6-1805w.webp 1805w"
+                   sizes="(max-width: 900px) 92vw, 520px"
+                   width="1805" height="2048" loading="lazy"
+                   alt="Deux chiens, un flat-coated retriever noir et un golden retriever, sur la table de toilettage">
             </div>
           </div>
           <div class="reveal" data-delay="1">
@@ -179,7 +191,8 @@
             <button v-for="(photo, i) in photos" :key="photo.src" class="gallery-item" type="button"
                     @click="openLightbox(i)" @keydown.enter.prevent="openLightbox(i)"
                     :aria-label="'Agrandir la photo : ' + photo.alt">
-              <img :src="photo.src" :alt="photo.alt" loading="lazy">
+              <img :src="photo.src" :srcset="photo.srcset" :sizes="photo.sizes"
+                   :width="photo.w" :height="photo.h" loading="lazy" decoding="async" :alt="photo.alt">
             </button>
           </div>
         </div>
@@ -206,24 +219,32 @@
           </div>
           <div class="contact-grid">
             <a class="contact-card reveal" :href="isTouch ? 'tel:5799602902' : null" @click="onPhoneCardClick">
-              <span class="card-icon"><svg class="icon"><use href="#icon-phone"/></svg></span>
-              <span class="card-label">Téléphone</span>
+              <span class="card-top">
+                <span class="card-icon"><svg class="icon"><use href="#icon-phone"/></svg></span>
+                <span class="card-label">Téléphone</span>
+              </span>
               <span class="card-value">579-960-2902</span>
               <span v-if="!isTouch" class="card-hint">{{ copied ? 'Copié !' : 'Cliquez pour copier' }}</span>
             </a>
             <a class="contact-card reveal" data-delay="1" href="mailto:toilettage.m.m@gmail.com">
-              <span class="card-icon"><svg class="icon"><use href="#icon-mail"/></svg></span>
-              <span class="card-label">Courriel</span>
+              <span class="card-top">
+                <span class="card-icon"><svg class="icon"><use href="#icon-mail"/></svg></span>
+                <span class="card-label">Courriel</span>
+              </span>
               <span class="card-value">toilettage.m.m@gmail.com</span>
             </a>
             <a class="contact-card reveal" data-delay="2" href="https://maps.app.goo.gl/ofbPG2buoMZZ3w1t8" target="_blank" rel="noopener">
-              <span class="card-icon"><svg class="icon"><use href="#icon-pin"/></svg></span>
-              <span class="card-label">Notre adresse</span>
+              <span class="card-top">
+                <span class="card-icon"><svg class="icon"><use href="#icon-pin"/></svg></span>
+                <span class="card-label">Notre adresse</span>
+              </span>
               <span class="card-value">12 B rue St-Pierre, l'Épiphanie, J5X 3V1</span>
             </a>
             <a class="contact-card reveal" data-delay="3" href="https://www.facebook.com/profile.php?id=61568497652595" target="_blank" rel="noopener">
-              <span class="card-icon"><svg class="icon"><use href="#icon-facebook"/></svg></span>
-              <span class="card-label">Notre facebook</span>
+              <span class="card-top">
+                <span class="card-icon"><svg class="icon"><use href="#icon-facebook"/></svg></span>
+                <span class="card-label">Notre facebook</span>
+              </span>
               <span class="card-value">Toilettage M&amp;M</span>
             </a>
           </div>
@@ -256,7 +277,7 @@
         </button>
         <figure class="lb-figure">
           <transition name="lbimg" mode="out-in">
-            <img :key="lightbox.index" :src="currentPhoto.src" :alt="currentPhoto.alt">
+            <img :key="lightbox.index" :src="currentPhoto.large" :srcset="currentPhoto.srcset" sizes="100vw" :alt="currentPhoto.alt">
           </transition>
         </figure>
         <button class="lb-btn lb-next" type="button" @click="next" aria-label="Photo suivante">
@@ -268,7 +289,7 @@
 
   </div>
 
-  <script src="assets/vue.global.prod.js"></script>
-  <script src="js/app.js"></script>
+  <script defer src="assets/vue.global.prod.js"></script>
+  <script defer src="js/app.js"></script>
 </body>
 </html>

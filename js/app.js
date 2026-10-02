@@ -6,21 +6,33 @@
 
   createApp({
     setup() {
-      /* ---------- Photos du salon ---------- */
-      const photos = [
-        { src: 'img_dogs/husky.webp', alt: 'Husky souriant pendant son bain' },
-        { src: 'img_dogs/Untitled.jpg', alt: 'Petit shih tzu gris et blanc avec son bandana' },
-        { src: 'img_dogs/Untitled2.jpg', alt: 'Chat noir aux yeux ambrés avec son bandana, devant sa cage de transport' },
-        { src: 'img_dogs/Untitled3.jpg', alt: 'Jeune chien noir et feu avec un bandana bleu, sur la table de toilettage' },
-        { src: 'img_dogs/Untitled4.jpg', alt: 'Malamute allongé près de la porte du salon' },
-        { src: 'img_dogs/Untitled5.jpg', alt: 'Un flat-coated retriever noir et un golden retriever côte à côte' },
-        { src: 'img_dogs/Untitled6.jpg', alt: 'Chat maine coon roux avec son bandana, sur le comptoir du salon' },
-        { src: 'img_dogs/Untitled7.jpg', alt: 'Petit shih tzu beige avec un bandana vert' },
-        { src: 'img_dogs/Untitled8.jpg', alt: 'Chat persan gris après sa séance de démêlage, avec la fourrure retirée' },
-        { src: 'img_dogs/Untitle9d.jpg', alt: 'Petit spitz nain tout en rondeurs avec son bandana vert' },
-        { src: 'img_dogs/Untitled10.jpg', alt: 'Jeune caniche golden tout sourire' },
-        { src: 'img_dogs/zoro.webp', alt: 'Shih tzu avec un bandana de fêtes sur la table de toilettage' }
+      /* ---------- Photos du salon (variantes générées par tools/convert.py) ---------- */
+      const PHOTO_DATA = [
+        { base: 'img_dogs/dog1', w: 1536, h: 2048, alt: 'Jeune chien beige au pelage soyeux avec un bandana rose, sur la table de toilettage' },
+        { base: 'img_dogs/dog2', w: 2048, h: 1536, alt: 'Petit shih tzu gris et blanc avec son bandana' },
+        { base: 'img_dogs/dog3', w: 1536, h: 2048, alt: 'Chat noir aux yeux ambrés avec son bandana, devant sa cage de transport' },
+        { base: 'img_dogs/dog4', w: 1536, h: 2048, alt: 'Jeune chien noir et feu avec un bandana bleu, sur la table de toilettage' },
+        { base: 'img_dogs/dog5', w: 2028, h: 2048, alt: 'Malamute allongé près de la porte du salon' },
+        { base: 'img_dogs/dog6', w: 1805, h: 2048, alt: 'Un flat-coated retriever noir et un golden retriever côte à côte' },
+        { base: 'img_dogs/dog7', w: 1946, h: 2048, alt: 'Chat maine coon roux avec son bandana, sur le comptoir du salon' },
+        { base: 'img_dogs/dog8', w: 1536, h: 2048, alt: 'Petit shih tzu beige avec un bandana vert' },
+        { base: 'img_dogs/dog9', w: 2048, h: 1536, alt: 'Chat persan gris après sa séance de démêlage, avec la fourrure retirée' },
+        { base: 'img_dogs/dog10', w: 1536, h: 2048, alt: 'Petit spitz nain tout en rondeurs avec son bandana vert' },
+        { base: 'img_dogs/dog11', w: 2048, h: 1536, alt: 'Jeune caniche golden tout sourire' },
+        { base: 'img_dogs/dog12', w: 960, h: 640, alt: 'Shih tzu avec un bandana de fêtes sur la table de toilettage' }
       ];
+
+      const photos = PHOTO_DATA.map((p) => {
+        const variants = [480, 960, 1600].filter((v) => v < p.w).concat(p.w);
+        const def = variants.find((v) => v >= 960) || variants[variants.length - 1];
+        return {
+          ...p,
+          srcset: variants.map((v) => `${p.base}-${v}w.webp ${v}w`).join(', '),
+          src: `${p.base}-${def}w.webp`,
+          large: `${p.base}-${variants[variants.length - 1]}w.webp`,
+          sizes: '(max-width: 900px) 45vw, 320px'
+        };
+      });
 
       /* ---------- Visionneuse ---------- */
       const lightbox = reactive({ open: false, index: 0 });

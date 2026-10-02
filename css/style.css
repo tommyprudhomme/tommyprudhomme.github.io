@@ -405,14 +405,19 @@ a { color: var(--accent); text-decoration: none; }
   border-color: rgba(217, 166, 72, .5);
 }
 
-.card-icon .icon { width: 26px; height: 26px; color: var(--accent); }
+.card-icon .icon { width: 24px; height: 24px; color: var(--accent); }
+
+.card-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
 .card-label {
   font-size: .82rem;
   text-transform: uppercase;
   letter-spacing: .1em;
   color: var(--ink-faint);
-  margin-top: 8px;
 }
 
 .card-value { font-weight: 700; color: var(--ink); overflow-wrap: anywhere; }
@@ -461,12 +466,14 @@ a { color: var(--accent); text-decoration: none; }
   justify-content: center;
 }
 
-.lb-figure { margin: 0 96px; max-width: min(1100px, calc(100vw - 260px)); }
+.lb-figure { margin: 0; max-width: 100%; max-height: 100%; line-height: 0; }
 
 .lb-figure img {
-  max-height: 84vh;
-  max-width: 100%;
+  max-height: calc(100vh - 96px);
+  max-height: calc(100dvh - 96px);
+  max-width: calc(100vw - 180px);
   width: auto;
+  height: auto;
   border-radius: 14px;
   box-shadow: 0 30px 80px rgba(0, 0, 0, .5);
 }
@@ -596,11 +603,19 @@ a { color: var(--accent); text-decoration: none; }
 
   .footer-grid { flex-direction: column; align-items: flex-start; }
 
-  .lb-figure { margin: 0 20px; }
+  .lb-figure img {
+    max-width: calc(100vw - 24px);
+    max-height: calc(100vh - 150px);
+    max-height: calc(100dvh - 150px);
+  }
 
-  .lb-prev { left: 10px; }
+  .lb-prev { left: 8px; }
 
-  .lb-next { right: 10px; }
+  .lb-next { right: 8px; }
 
   .lb-btn { width: 44px; height: 44px; }
+
+  .lb-close { top: 14px; right: 14px; }
+
+  .lb-count { bottom: 14px; }
 }
